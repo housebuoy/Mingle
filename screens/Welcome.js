@@ -21,21 +21,6 @@ const Welcome = () => {
         return () => clearTimeout(timer);
     }, [navigation]);
 
-    const [fontsLoaded, fontError] = useFonts({
-        'GrandHotel-Regular': require('../assets/fonts/GrandHotel-Regular.ttf'),
-        'Poppins-Medium': require('../assets/fonts/Poppins/Poppins-Medium.ttf'), 
-    });
-    
-      const onLayoutRootView = useCallback(async () => {
-        if (fontsLoaded || fontError) {
-          await SplashScreen.hideAsync();
-        }
-      }, [fontsLoaded, fontError]);
-    
-      if (!fontsLoaded && !fontError) {
-        return null;
-      }
-
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>

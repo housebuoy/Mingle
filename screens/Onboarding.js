@@ -10,26 +10,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
 import Swiper from 'react-native-swiper';
 
-const Onboarding = ({onPress ,navigation}) => {
+const Onboarding = ({navigation}) => {
 
-    const [fontsLoaded, fontError] = useFonts({
-        'GrandHotel-Regular': require('../assets/fonts/GrandHotel-Regular.ttf'),
-        'Poppins-Medium': require('../assets/fonts/Poppins/Poppins-Medium.ttf'), 
-        'Poppins-Bold': require('../assets/fonts/Poppins/Poppins-Bold.ttf'), 
-    });
-    
-      const onLayoutRootView = useCallback(async () => {
-        if (fontsLoaded || fontError) {
-          await SplashScreen.hideAsync();
-        }
-      }, [fontsLoaded, fontError]);
-    
-      if (!fontsLoaded && !fontError) {
-        return null;
-      }
-
-
-  return (
+return (
     <SafeAreaView style={styles.container}>
         <Swiper
             style={styles.wrapper}

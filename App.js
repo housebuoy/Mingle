@@ -1,3 +1,4 @@
+import fonts from './components/Fonts.js';
 import Welcome from './screens/Welcome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,6 +8,7 @@ import SignIn from './screens/SignIn';
 const Stack = createStackNavigator();
 
 export default function App() {
+  fonts()
   return (
      <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
