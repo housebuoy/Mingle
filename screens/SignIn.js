@@ -15,7 +15,7 @@ const SignIn = ({navigation}) => {
             <Text style={{fontFamily: 'Poppins-Bold', color: '#000', marginTop: 20, fontSize: 24, textAlign: 'center'}} >
                 Sign up to continue
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.button}>
+            <TouchableOpacity onPress={() => navigation.navigate('EmailInput')} style={styles.button}>
                 <Text style={styles.buttonText}>
                     Continue with email
                 </Text>
@@ -30,13 +30,13 @@ const SignIn = ({navigation}) => {
             <Image source={line} style={styles.line} resizeMode="contain" />
         </View>
         <View style={{flex: 1, flexDirection: 'row', marginTop: 20, alignItems: 'center', justifyContent: "center", gap: 40, marginHorizontal: 20}}>
-            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={{paddingHorizontal:20, paddingVertical:20, borderRadius: 10, backgroundColor: '#d6d8d8'}}>
+            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={{paddingHorizontal:15, paddingVertical:15, borderRadius: 10, backgroundColor: '#d6d8d8'}}>
                 <Image source={facebook} style={{}} resizeMode="contain" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={{paddingHorizontal:20, paddingVertical:20, borderRadius: 10, backgroundColor: '#d6d8d8'}}>
+            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={{paddingHorizontal:15, paddingVertical:15, borderRadius: 10, backgroundColor: '#d6d8d8'}}>
                 <Image source={google} style={{}} resizeMode="contain" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={{paddingHorizontal:20, paddingVertical:20, borderRadius: 10, backgroundColor: '#d6d8d8'}}>
+            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={{paddingHorizontal:15, paddingVertical:15, borderRadius: 10, backgroundColor: '#d6d8d8'}}>
                 <Image source={apple} style={{}} resizeMode="contain" />
             </TouchableOpacity>
         </View>
