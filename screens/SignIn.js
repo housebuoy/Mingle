@@ -52,6 +52,14 @@ const SignIn = ({navigation}) => {
                 </Text>
             </TouchableOpacity>
         </View>
+        <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: "center", gap: 4,}}>
+        <Text style={{fontFamily: 'Poppins-Medium', color: "#8D8B8B", marginTop: 20, fontSize: 14, textAlign: 'center'}}>
+            Already have an account?
+        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={{}}>
+                <Text style={{fontFamily: 'Poppins-Bold', color: '#E94057', marginLeft: 20}}>Sign In</Text>
+        </TouchableOpacity>
+        </View>
         <StatusBar style="auto" />
     </SafeAreaView>
   )

@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { View, Text, StatusBar, Image, StyleSheet, TouchableOpacity, TextInput, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-// import CountryCodeDropdownPicker from 'react-native-dropdown-country-picker'
+// import Constants from 'expo-constants';
+// import CountryPicker from 'react-native-country-picker-modal';// import CountryCodeDropdownPicker from 'react-native-dropdown-country-picker';
 import { useCallback } from 'react';
 
 const MobileLogin = () => {
@@ -26,6 +27,7 @@ const MobileLogin = () => {
         console.log('Mobile number verified successfully!');
     };
 
+
     return (
         <SafeAreaView style={styles.container}>
             <View>
@@ -38,16 +40,21 @@ const MobileLogin = () => {
             </View>
             <View>
                 <View style={styles.inputContainer}>
-                    <View style={styles.countryCodeContainer}>
-                    {/* <CountryCodeDropdownPicker 
-                        selected={selected} 
-                        setSelected={setSelected}
-                        setCountryDetails={setCountry} 
-                        phone={phone} 
-                        setPhone={setPhone} 
-                        countryCodeTextStyles={{fontSize: 13}}
-                    /><countryCodePicker /> */}
-                    </View>
+                    <TouchableOpacity >
+                        <View style={styles.countryCodeContainer}>
+                        {/* <CountryPicker 
+                        withEmoji
+                        /> */}
+                        {/* <CountryCodeDropdownPicker 
+                            selected={selected} 
+                            setSelected={setSelected}
+                            setCountryDetails={setCountry} 
+                            phone={phone} 
+                            setPhone={setPhone} 
+                            countryCodeTextStyles={{fontSize: 13}}
+                        /><countryCodePicker /> */}
+                        </View>
+                    </TouchableOpacity>
                     <View style={styles.inputTelContainer}>
                         <TextInput
                             style={[styles.input]}
@@ -62,6 +69,7 @@ const MobileLogin = () => {
                     <Text style={styles.buttonText}>Continue</Text>
                 </Pressable>
             </View>
+            
         </SafeAreaView>
     )
 }

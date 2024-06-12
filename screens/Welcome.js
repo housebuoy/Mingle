@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 // import { SafeAreaView } from 'react-native-safe-area-context';
 import logo from '../assets/images/logo.png';
+import fonts from '../components/Fonts'
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
@@ -12,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const Welcome = () => {
+  fonts()
     const navigation = useNavigation();
 
     useEffect(() => {
