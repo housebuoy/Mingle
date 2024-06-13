@@ -6,6 +6,7 @@ import Onboarding from './screens/Onboarding';
 import SignIn from './screens/SignIn';
 import MobileLogin from './screens/MobileLogin';
 import EmailInputScreen from './screens/EmailInputScreen.js';
+import Login from './screens/Login.js';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -41,6 +42,12 @@ export default function App() {
         <Stack.Screen 
           name="EmailInput" 
           component={EmailInputScreen}
+          options={{
+            headerShown: false,
+          }} />
+        <Stack.Screen 
+          name="Login" 
+          component={Login}
           options={{
             headerShown: false,
           }} />

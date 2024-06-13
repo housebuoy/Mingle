@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView, Modal, Alert } from 'react-native';
+import firebase from '../utils/firebaseConfig';
 
 const EmailInputScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [nameValue, setNameValue] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   const [emailError, setEmailError] = useState('');
+  const isFocused = useRef(false);
+  const inputStyle = [
+    styles.input,
+    isFocused.current? styles.inputFocused : {}
+  ];
 
   const validateEmail = (email) => {
     const regex = /\S+@\S+\.\S+/;
@@ -20,26 +26,36 @@ const EmailInputScreen = ({ navigation }) => {
     return true;
   };
 
+  const validateForm = () => {
+    return email!== '' && nameValue!== '' && userName!== '' && password!== '';
+  };
+
   const handleNameChange = (text) => {
     setNameValue(text);
   };
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
   const handleContinuePress = () => {
-    // Simulate email verification process
+    if (validateForm()) {
+    setModalMessage("Check your email to verify and login");
     setModalVisible(true);
     setTimeout(() => {
       setModalVisible(false);
-      navigation.navigate('HomeScreen');
+      navigation.navigate('SignIn');
     }, 3000);
+    } else {
+      setModalMessage("Please fill all required fields!");
+      setModalVisible(true);
+      setTimeout(() => {
+        setModalVisible(false);
+      }, 1000);
+    }
   };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setModalMessage(""); // Optional: Reset the message when closing the modal
+  };
+
 
   return (
     <ScrollView style={styles.container}>
@@ -54,13 +70,13 @@ const EmailInputScreen = ({ navigation }) => {
                 Name
               </Text>
               <TextInput
-                style={[styles.input, isFocused && styles.inputFocused]}
+                style={[styles.input, isFocused.current? styles.inputFocused : {},!email? styles.requiredField : {}]}
+                onBlur={() => (isFocused.current = false)}
                 keyboardType="default"
                 placeholder="Enter Full name"
                 value={nameValue}
                 onChangeText={setNameValue}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
+                // onBlur={handleBlur}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -68,13 +84,13 @@ const EmailInputScreen = ({ navigation }) => {
                 User Name
               </Text>
               <TextInput
-                style={[styles.input, isFocused && styles.inputFocused]}
+                style={[styles.input, isFocused.current? styles.inputFocused : {},!email? styles.requiredField : {}]}
+                onBlur={() => (isFocused.current = false)}
                 keyboardType="name-phone-pad"
                 placeholder="Enter User name"
                 value={userName}
                 onChangeText={setUserName}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
+                // onBlur={handleBlur}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -82,16 +98,14 @@ const EmailInputScreen = ({ navigation }) => {
                 Email Address
               </Text>
               <TextInput
-                style={[styles.input, isFocused && styles.inputFocused]}
-                keyboardType="email-address"
+                style={[styles.input, isFocused.current? styles.inputFocused : {},!email? styles.requiredField : {}]}
+                onBlur={() => (isFocused.current = false)}
                 placeholder="Enter Email address"
                 value={email}
                 onChangeText={(text) => {
                   setEmail(text);
                   validateEmail(text); // Validate the email as the user types
                 }}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
               />
               
               {emailError && <Text style={{color: 'red'}}>{emailError}</Text>}
@@ -101,13 +115,14 @@ const EmailInputScreen = ({ navigation }) => {
                 Password
               </Text>
               <TextInput
-                style={[styles.input, isFocused && styles.inputFocused]}
+                style={[styles.input, isFocused.current? styles.inputFocused : {},!email? styles.requiredField : {}]}
+                onBlur={() => (isFocused.current = false)}
                 keyboardType="visible-password"
                 placeholder="Enter Password"
                 value={password}
                 onChangeText={setPassword}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
+                secureTextEntry={true}
+                required
               />
             </View>
             <TouchableOpacity onPress={handleContinuePress} style={styles.button}>
@@ -116,16 +131,16 @@ const EmailInputScreen = ({ navigation }) => {
                 </Text>
             </TouchableOpacity>
             <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
+              animationType="fade"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                closeModal();
           }}
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Check your email to verify and login</Text>
+              <Text style={styles.modalText}>{modalMessage}</Text>
             </View>
           </View>
         </Modal>
@@ -171,15 +186,15 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   input: {
-    fontSize: 18,
-    fontFamily: 'Poppins-Medium',
-    color: '#4D4D4D',
+    fontSize: 22,
+    fontFamily: 'Poppins-Bold',
+    color: '#878686',
     width: '100%',
-    // paddingHorizontal:  20,
+    paddingHorizontal:  5,
     paddingTop : 5,
 },
   inputContainer:{
@@ -188,7 +203,7 @@ const styles = StyleSheet.create({
     color: '#000',
     backgroundColor: '#fff',
     borderWidth: 0.5,
-    borderColor: '#4d4d4d',
+    borderColor: '#cecdcd',
     borderRadius: 10,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -199,7 +214,7 @@ const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 20,
-    fontFamily: 'Poppins-Bold',
+    fontFamily: 'Poppins-Medium',
     color: '#E94057',
   },
   button: {
@@ -217,7 +232,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   inputFocused: {
-    borderColor: '#ff0707',
+    backgroundColor: '#fff'
   },
   modalView: {
     backgroundColor: 'white',

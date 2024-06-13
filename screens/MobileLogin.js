@@ -2,11 +2,10 @@ import React, {useState, useEffect} from 'react'
 import { View, Text, StatusBar, Image, StyleSheet, TouchableOpacity, TextInput, Pressable } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 // import Constants from 'expo-constants';
-// import CountryPicker from 'react-native-country-picker-modal';// import CountryCodeDropdownPicker from 'react-native-dropdown-country-picker';
 import { useCallback } from 'react';
 
-const MobileLogin = () => {
 
+const MobileLogin = ({navigation}) => {
     // const [selected, setSelected] = React.useState('+91');
     // const [country, setCountry] = React.useState('');
     // const [phone, setPhone] = React.useState('');
@@ -42,30 +41,19 @@ const MobileLogin = () => {
                 <View style={styles.inputContainer}>
                     <TouchableOpacity >
                         <View style={styles.countryCodeContainer}>
-                        {/* <CountryPicker 
-                        withEmoji
-                        /> */}
-                        {/* <CountryCodeDropdownPicker 
-                            selected={selected} 
-                            setSelected={setSelected}
-                            setCountryDetails={setCountry} 
-                            phone={phone} 
-                            setPhone={setPhone} 
-                            countryCodeTextStyles={{fontSize: 13}}
-                        /><countryCodePicker /> */}
                         </View>
                     </TouchableOpacity>
                     <View style={styles.inputTelContainer}>
                         <TextInput
                             style={[styles.input]}
-                            placeholder="Enter mobile number"
+                            placeholder="+233 207026823"
                             value={mobileNumber}
                             onChangeText={setMobileNumber}
                             keyboardType="phone-pad"
                         />
                     </View>
                 </View>
-                <Pressable style={styles.button} onPress={handleSubmit}>
+                <Pressable style={styles.button} onPress={ handleSubmit}>
                     <Text style={styles.buttonText}>Continue</Text>
                 </Pressable>
             </View>
@@ -94,7 +82,7 @@ const styles = StyleSheet.create({
         color: '#4D4D4D'
     },
     input: {
-        fontSize: 18,
+        fontSize: 24,
         fontFamily: 'Poppins-Medium',
         color: '#4D4D4D',
         width: '100%',
@@ -138,11 +126,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center'
       },
-
-      countryCodeContainer: {
-
-      }
-
-    
 
 });
